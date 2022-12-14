@@ -12,5 +12,7 @@ Participants are expected to present unique solutions to the two major problems:
    
    
 comparison_part1.py is for Smart counting of stocks and verifying it against the system
+
 search.py is for Automatic identification of the availability of particular item against the rack in physical store
+
 sku_read.py is for reading SKU codes from live video feed
