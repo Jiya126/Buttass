@@ -1,0 +1,10 @@
+# Data to be stored in format 
+# A = [[("SKU code", 0/1), (), ()....,()],[],[],.......,[]]
+# SKU code format = itemType_itemClassification_Quantity - metalUsed_monthAndYearOfFormation
+# example - RB00001-GS1222  => RingBandtypeNumber1-GoldStoneDecember2022
+# 0/1 defines availability of item in store {0 = not available, 1 = available}
+
+A = [[("RB00001-GS1222", 1),("RB00002-GS1222", 1),("RB00003-GS1122", 1),("RC00004-GP0922", 0),("RC00005-GS0922", 1),("RE00006-SS1122", 1)],
+          [("ES00010-YG1022", 1),("ES00012-YG0522", 1),("ED00007-GS0922", 0),("ED00009-WG1022", 1),("EJ00018-GS0622", 1),("EJ00020-GS1122", 0)],
+          [("BC00022-YG1022", 0),("BC00015-YG0123", 1),("BC00014-GS0922", 1),("BC00008-RG1122", 1),("BO00028-GS0223", 1),("BF00027-YG1022", 1)],
+          [("NP00030-GS0523", 1),("NP00032-GS0522", 1),("NC00031-DS0223", 0),("NC00036-GS0423", 1),("NC00037-DG0422", 1),("NC00039-GS0422",0)]]
