@@ -36,13 +36,13 @@ class Bill:
     return self.price
 
 # Save some bills
-bill1 = Bill(barcode='12345', sku_code='A1', product_image='image1.jpg', price=100)
+bill1 = Bill(barcode='12345', sku_code='RB00001-GS1222', product_image='image1.jpg', price=14230)
 save_bill(bill1)
 
-bill2 = Bill(barcode='23456', sku_code='A2', product_image='image2.jpg', price=200)
+bill2 = Bill(barcode='23456', sku_code='EJ00018-GS0622', product_image='image2.jpg', price=27070)
 save_bill(bill2)
 
-bill3 = Bill(barcode='34567', sku_code='B1', product_image='image3.jpg', price=150)
+bill3 = Bill(barcode='34567', sku_code='NC00036-GS0423', product_image='image3.jpg', price=40800)
 save_bill(bill3)
 
 # Create a DataFrame from the list of bills
