@@ -1,35 +1,28 @@
-import numpy as pd
+import numpy as np
 import pandas as pd
 
-# create a dictionary with the data for each example
-data = {'Bar Code': ['A1B2C3', 'D4E5F6', 'G7H8I9', 'J0K1L2'],
-        'SKU Code': ['MNOPQR', 'STUVWX', 'YZ1234', '567890'],
-        'Product Image': ['product1.jpg', 'product2.jpg', 'product3.jpg', 'product4.jpg'],
-        'Price': [12.99, 9.99, 19.99, 7.99]}
+A = [[("RB00001-GS1222", 1),("RB00002-GS1222", 1),("RB00003-GS1122", 1),("RC00004-GP0922", 0),("RC00005-GS0922", 1),("RE00006-SS1122", 1)],
+          [("ES00010-YG1022", 1),("ES00012-YG0522", 1),("ED00007-GS0922", 0),("ED00009-WG1022", 1),("EJ00018-GS0622", 1),("EJ00020-GS1122", 0)],
+          [("BC00022-YG1022", 0),("BC00015-YG0123", 1),("BC00014-GS0922", 1),("BC00008-RG1122", 1),("BO00028-GS0223", 1),("BF00027-YG1022", 1)],
+          [("NP00030-GS0523", 1),("NP00032-GS0522", 1),("NC00031-DS0223", 0),("NC00036-GS0423", 1),("NC00037-DG0422", 1),("NC00039-GS0422",0)]]
 
-# create a DataFrame from the dictionary
-original_df = pd.DataFrame(data)
 
-# view the DataFrame
-print(original_df)
-
-#saving the DataFrame as a CSV File
-original_df.to_csv('original_df.csv')
+print(A)
 
 # Create an empty list to store the bills
 bills = []
 
 # Create a function to save a bill and extract its features
 def save_bill(bill):
-    barcode = bill.get_barcode()
-    sku_code = bill.get_sku_code()
-    product_image = bill.get_product_image()
-    price = bill.get_price()
-
+    # Extract the barcode, SKU code, product image and price from the bill
+  barcode = bill.get_barcode()
+  sku_code = bill.get_sku_code()
+  product_image = bill.get_product_image()
+  price = bill.get_price()
     # Create a dictionary with the bill data
-    data = {'Bar Code': barcode, 'SKU Code': sku_code, 'Product Image' : product_image, 'Price': price}
+  data = {'Bar Code': barcode, 'SKU Code': sku_code, 'Product Image' : product_image, 'Price': price}
     # Add the dictionary to the list of bills
-    bills.append(data)
+  bills.append(data)
 
 #Define Bill
 class Bill:
@@ -48,49 +41,52 @@ class Bill:
         return self.price
 
 # Save some bills
-bill1 = Bill(barcode='12345', sku_code='A1', product_image='image1.jpg', price=100)
+bill1 = Bill(barcode='12345', sku_code='RB00001-GS1222', product_image='image1.jpg', price=14230)
 save_bill(bill1)
 
-bill2 = Bill(barcode='23456', sku_code='A2', product_image='image2.jpg', price=200)
+bill2 = Bill(barcode='23456', sku_code='EJ00018-GS0622', product_image='image2.jpg', price=27070)
 save_bill(bill2)
 
-bill3 = Bill(barcode='34567', sku_code='B1', product_image='image3.jpg', price=150)
+bill3 = Bill(barcode='34567', sku_code='NC00036-GS0423', product_image='image3.jpg', price=40800)
 save_bill(bill3)
 
+# print(bills)
 # Create a DataFrame from the list of bills
 df = pd.DataFrame(bills)
 
-# Print the DataFrame
-print(df)
+codes = df.loc[:,"SKU Code"]
+print(codes)
 
-#saving the DataFrame as a CSV File
-df.to_csv('df.csv')
+numberBills = len(bills)
+i = 0
+while i<numberBills:
+  k = codes[i]
 
-# read in the datasets
-Original_Dataset = pd.read_csv('original_df.csv')
-Generated_Dataset = pd.read_csv('df.csv')
+  x=0
+  y=0
+  for l in A[0]:
+      y=y+1
+  for l in A:
+      x=x+1
+  r=-1
+  c=-1
+  # print(x,y)
+  for m in range(x):
+    for n in range(y):
+      if(k==A[m][n][0]):
+          A[m][n] = (k,0)
+  
+  i = i+1
 
-# create an empty list to store the results
-results = []
+print(A)
 
-# loop through the rows of the Generated_Dataset
-for i, row in Generated_Dataset.iterrows():
-    # get the SKU code from the current row
-    sku = row['SKU Code']
+count = 0
+for m in range(x):
+    for n in range(y):
+      if(A[m][n][1] == 1):
+        count = count + 1
+      else:
+        continue
 
-    # check if the SKU code is in the Original_Dataset
-    if sku in Original_Dataset['SKU Code'].values:
-        # if it is, append 0 to the results list
-        results.append(0)
-    else:
-        # if it's not, append 1 to the results list
-        results.append(1)
-
-# print the results
-print(results)
-
-# count the number of 1's in the list
-num_ones = results.count(1)
-
-# print the number of 1's
-print(num_ones)
+# stock count
+print(count)
